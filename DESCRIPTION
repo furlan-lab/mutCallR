@@ -1,0 +1,18 @@
+Package: mutCallR
+Type: Package
+Title: Conveniently load mutCaller data into R
+Version: 0.1.0
+Author: Scott Furlan
+Maintainer: Scott Furlan <scfurl@users.noreply.github.com>
+Description: This software is part of a larger ecosystem of tools for mapping variants to single cell genomics data.  This 
+    program will load output files from mutCaller - https://github.com/furlan-lab/mutCaller.  Then will calculate use count data 
+    to classify cells for a given variant.
+License: MIT
+Encoding: UTF-8
+Imports: monocle3 (>= 0.1.0),
+  Seurat (> 4.0.0),
+  stringdist (> 0.9.0),
+  pbmcapply (> 1.4.0),
+  data.table (> 1.14.0)
+RoxygenNote: 7.2.0
+LazyData: true
