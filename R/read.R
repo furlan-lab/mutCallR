@@ -72,8 +72,12 @@ read_mutcaller<-function(obj=NULL, count_files, name, prefixes=NULL, cores=1, re
   }, mc.cores = cores)
   if(!is.null(prefixes)){
     datlist<-lapply(1:length(datlist), function (n){
-      datlist[[n]]$cb<-paste0(prefixes[n], datlist[[n]]$cb)
-      datlist[[n]]
+      if(is.null(datlist[[n]])){
+        datlist[[n]]
+      }else{
+        datlist[[n]]$cb<-paste0(prefixes[n], datlist[[n]]$cb)
+        datlist[[n]]
+      }
     })
   }
   alldat<-do.call(rbind, datlist)
@@ -82,7 +86,7 @@ read_mutcaller<-function(obj=NULL, count_files, name, prefixes=NULL, cores=1, re
   }
   alldat<-call_cell(alldat, use_other)
   if(class(obj)=="Seurat"){
-    clean_cb<-clean_cb_format(Cells(seu))
+    clean_cb<-clean_cb_format(Cells(obj))
   } else if(class(obj)=="cell_data_set"){
     clean_cb<-colnames(obj)
   } else {
