@@ -49,7 +49,7 @@ read_mutcaller<-function(obj=NULL, count_files, name, prefixes=NULL, cores=1, re
     #colnames(d)<-c("cb", "umi", "seq", "loc", "name", "call", "count")
     d$cb<-substr(d$cb, 1, 16)
     if(reverse_complement){
-      d$cb<-toupper(reverseComplement(ct$cb))
+      d$cb<-toupper(reverseComplement(d$cb))
     }
     d<-d[d$count>read_thresh,]
     d<-d[d$name==name,]

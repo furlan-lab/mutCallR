@@ -12,7 +12,8 @@ read_mutcaller(
   cores = 1,
   read_thresh = 5,
   use_other = F,
-  query_top = T
+  query_top = T,
+  reverse_complement = F
 )
 }
 \arguments{
