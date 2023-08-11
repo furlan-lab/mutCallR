@@ -1,7 +1,7 @@
 Package: mutCallR
 Type: Package
 Title: Conveniently load mutCaller data into R
-Version: 0.1.0
+Version: 0.1.1
 Author: Scott Furlan
 Maintainer: Scott Furlan <scfurl@users.noreply.github.com>
 Description: This software is part of a larger ecosystem of tools for mapping variants to single cell genomics data.  This 
