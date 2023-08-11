@@ -38,8 +38,9 @@ glimpse_countsfile<-function(file){
 #' @param query_top, option for factoring the cell call output such that the levels of the factor enable plotting query cells on top; default = T
 #' @importFrom pbmcapply pbmclapply
 #' @importFrom readr read_delim
+#' @importFrom spgs reverseComplement
 #'
-read_mutcaller<-function(obj=NULL, count_files, name, prefixes=NULL, cores=1, read_thresh=5,  use_other=F, query_top=T){
+read_mutcaller<-function(obj=NULL, count_files, name, prefixes=NULL, cores=1, read_thresh=5,  use_other=F, query_top=T, reverse_complement=F){
   if (length(count_files)!=length(prefixes)){stop("Error: number of count files and number of prefixes do not match!")}
   #count_file<-count_files[1]
   datlist<-pbmclapply(count_files, function(count_file) {
@@ -47,6 +48,9 @@ read_mutcaller<-function(obj=NULL, count_files, name, prefixes=NULL, cores=1, re
     d<-readr::read_delim(count_file, col_names = c("cb", "umi", "seq", "loc", "name", "call", "count"))
     #colnames(d)<-c("cb", "umi", "seq", "loc", "name", "call", "count")
     d$cb<-substr(d$cb, 1, 16)
+    if(reverse_complement){
+      d$cb<-toupper(reverseComplement(ct$cb))
+    }
     d<-d[d$count>read_thresh,]
     d<-d[d$name==name,]
     datlist<-lapply(unique(d$cb), function(ucb){
